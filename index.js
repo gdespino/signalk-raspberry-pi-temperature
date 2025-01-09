@@ -29,7 +29,7 @@ module.exports = function(app) {
 
   plugin.schema = {
     type: "object",
-    description: "The user running node server must have permission to sudo without needing a password",
+    description: "The user running node server does NOT need to have permission to sudo",
     properties: {
       path: {
         title: "SignalK Path",
@@ -52,7 +52,7 @@ module.exports = function(app) {
 
       process.stdout.on('data', (data) => {
         app.debug(`got ${data}`)
-        var temp = Number(data.toString() / 1000
+        var temp = Number(data.toString() / 1000.0
         app.debug(`temp is ${temp}`)
 
         app.handleMessage(plugin.id, {
