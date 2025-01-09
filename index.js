@@ -17,7 +17,7 @@
 const _ = require('lodash')
 const spawn = require('child_process').spawn
 
-const command = 'sudo /opt/vc/bin/vcgencmd measure_temp'
+const command = 'cat /sys/class/thermal/thermal_zone0/temp'
 
 module.exports = function(app) {
   var plugin = {};
@@ -52,7 +52,7 @@ module.exports = function(app) {
 
       process.stdout.on('data', (data) => {
         app.debug(`got ${data}`)
-        var temp = Number(data.toString().split('=')[1].split('\'')[0]) + 273.15
+        var temp = Number(data.toString() / 1000
         app.debug(`temp is ${temp}`)
 
         app.handleMessage(plugin.id, {
